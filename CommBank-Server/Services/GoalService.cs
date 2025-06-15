@@ -1,4 +1,5 @@
 ﻿using CommBank.Models;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace CommBank.Services;
@@ -10,6 +11,11 @@ public class GoalsService : IGoalsService
     public GoalsService(IMongoDatabase mongoDatabase)
     {
         _goalsCollection = mongoDatabase.GetCollection<Goal>("Goals");
+        var documents = _goalsCollection.Find(FilterDefinition<Goal>.Empty).ToList();
+        foreach (var doc in documents)
+        {
+            Console.WriteLine(doc.ToJson());
+        }
     }
 
     public async Task<List<Goal>> GetAsync() =>
