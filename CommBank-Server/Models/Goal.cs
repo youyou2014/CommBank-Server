@@ -28,6 +28,7 @@ public class Goal
     [BsonRepresentation(BsonType.ObjectId)]
     public string? UserId { get; set; }
 
+    //support icon
     [BsonIgnoreIfNull]
     public string? Icon { get; set; }
 }
